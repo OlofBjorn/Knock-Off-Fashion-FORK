@@ -13,6 +13,23 @@
 
 <a href="{{ route('products.create') }}">Create New Product</a>
 
+<form method="GET" action="{{ route('products.index') }}">
+    @csrf
+    <input type="text" name="brand_name" placeholder="Brand"
+        value="{{ request('brand_name') }}">
+
+    <input type="text" name="category" placeholder="Category"
+        value="{{ request('category') }}">
+
+    <input type="number" step="0.01" name="min_price" placeholder="Min Price"
+        value="{{ request('min_price') }}">
+
+    <input type="number" step="0.01" name="max_price" placeholder="Max Price"
+        value="{{ request('max_price') }}">
+
+    <button type="submit">Filter</button>
+</form>
+
 <table border="1" cellpadding="10">
     <thead>
         <tr>

@@ -10,9 +10,23 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::all();
+        $products = Product::query()
+            ->when($request->brand_name, function ($query, $brand) {
+                $query->where('brand_name', 'like', "%{$brand}%");
+            })
+            ->when($request->category, function ($query, $category) {
+                $query->where('category', $category);
+            })
+            ->when($request->min_price, function ($query, $min) {
+                $query->where('price', '>=', $min);
+            })
+            ->when($request->max_price, function ($query, $max) {
+                $query->where('price', '<=', $max);
+            })
+            ->get();
+
         return view('products.index', compact('products'));
     }
 
