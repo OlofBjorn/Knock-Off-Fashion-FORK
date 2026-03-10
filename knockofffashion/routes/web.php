@@ -23,3 +23,5 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
 });
+
+Route::resource('products', ProductController::class);
