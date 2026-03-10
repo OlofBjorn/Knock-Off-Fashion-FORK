@@ -10,9 +10,34 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $products = Product::query()
+            ->when($request->brand_name, function ($query, $brand) {
+                $brand = strtolower(str_replace(' ', '', $brand));
+
+                $query->whereRaw(
+                    "REPLACE(LOWER(brand_name), ' ', '') LIKE ?",
+                    ["%{$brand}%"]
+                );
+            })
+            ->when($request->category, function ($query, $category) {
+                $category = strtolower(str_replace(' ', '', $category));
+
+                $query->whereRaw(
+                    "REPLACE(LOWER(category), ' ', '') LIKE ?",
+                    ["%{$category}%"]
+                );
+            })
+            ->when($request->min_price, function ($query, $min) {
+                $query->where('price', '>=', $min);
+            })
+            ->when($request->max_price, function ($query, $max) {
+                $query->where('price', '<=', $max);
+            })
+            ->get();
+
+        return view('products.index', compact('products'));
     }
 
     /**
@@ -83,6 +108,10 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+    $product = Product::findOrFail($id);
+    $product->delete();
+
+    return redirect()->route('products.index')
+                     ->with('success', 'Product deleted successfully.');
     }
 }
