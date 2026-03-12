@@ -54,7 +54,7 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->brand_name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $product->description }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-900">${{ number_format($product->price, 2) }}</td>
+                            <td class="px-6 py-4 text-sm text-gray-900">SEK {{ number_format($product->price, 2) }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $product->category }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $product->color }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $product->stock }}</td>
