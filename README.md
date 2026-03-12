@@ -71,15 +71,15 @@ Semantic HTML
 
 The interface uses semantic elements such as:
 
-<nav>
+- nav
 
-<main>
+- main
 
-<section>
+- section
 
-<table>
+- table
 
-<form>
+- form
 
 This improves navigation for assistive technologies.
 
