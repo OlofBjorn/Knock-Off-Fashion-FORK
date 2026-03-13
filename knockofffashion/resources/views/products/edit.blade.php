@@ -24,11 +24,13 @@
             </div>
             @endif
 
-        <form action="{{ route('products.update', $product) }}" method="POST" novalidate>
+        <form action="{{ route('products.update', $product) }}" method="POST" novalidate class="max-w-3xl">        
         @csrf
         @method('PUT')
 
-            <div class="mb-3">
+        <div class="grid md:grid-cols-2 gap-6">
+
+            <div>
                 <label for="brand_name" class="block font-medium">Brand name</label>
                 <input
                     id="brand_name"
@@ -39,28 +41,12 @@
                     aria-invalid="{{ $errors->has('brand_name') ? 'true' : 'false' }}"
                     aria-describedby="{{ $errors->has('brand_name') ? 'brand_name-error' : '' }}"
                 >
-                @error('brand_name')
-                    <p id="brand_name-error" role="alert" class="text-sm text-red-700 mt-1">⚠ {{ $message }}</p>
-                @enderror
+                    @error('brand_name')
+                        <p id="brand_name-help" class="text-sm text-gray-600 mt-1">Maximum 50 characters.</p>                
+                    @enderror
             </div>
 
-            <div class="mb-3">
-                <label for="description" class="block font-medium">Description</label>
-                <textarea
-                    id="description"
-                    name="description"
-                    class="mt-1 block w-full border px-2 py-1"
-                    aria-invalid="{{ $errors->has('description') ? 'true' : 'false' }}"
-                    aria-describedby="{{ $errors->has('description') ? 'description-error' : '' }}"
-                    rows="4"
-                    >{{ old('description', $product->description) }}
-                </textarea>
-                @error('description')
-                    <p id="description-error" role="alert" class="text-sm text-red-700 mt-1">⚠ {{ $message }}</p>
-                @enderror
-            </div>
-
-            <div class="mb-3">
+            <div>
                 <label for="price" class="block font-medium">Price</label>
                 <input
                     id="price"
@@ -77,7 +63,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            <div>
                 <label for="category" class="block font-medium">Category</label>
                 <input
                     id="category"
@@ -93,7 +79,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            <div>
                 <label for="color" class="block font-medium">Color</label>
                 <input
                     id="color"
@@ -109,7 +95,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
+            <div>
                 <label for="stock" class="block font-medium">Stock</label>
                 <input
                     id="stock"
@@ -124,6 +110,24 @@
                     <p id="stock-error" role="alert" class="text-sm text-red-700 mt-1">⚠ {{ $message }}</p>
                 @enderror
             </div>
+
+            <div class="md:col-span-2">
+                <label for="description" class="block font-medium">Description</label>
+                <textarea
+                    id="description"
+                    name="description"
+                    class="mt-1 block w-full border px-2 py-1"
+                    aria-invalid="{{ $errors->has('description') ? 'true' : 'false' }}"
+                    aria-describedby="{{ $errors->has('description') ? 'description-error' : '' }}"
+                    rows="4"
+                    >{{ old('description', $product->description) }}
+                </textarea>
+                @error('description')
+                    <p id="description-error" role="alert" class="text-sm text-red-600 mt-1"Maximum 150 characters>⚠ {{ $message }}</p>
+                @enderror
+            </div>
+
+        </div>
 
             <div class="mt-4">
                 <button type="submit" class="px-4 py-2 bg-black text-white">Update Product</button>

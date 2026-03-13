@@ -1,5 +1,6 @@
 <?php
-
+use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
@@ -9,7 +10,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $productCount = Product::count();
+    $user = Auth::user();
+    return view('dashboard', compact('productCount', 'user'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -24,4 +27,3 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('products', ProductController::class);
 });
 
-Route::resource('products', ProductController::class);
