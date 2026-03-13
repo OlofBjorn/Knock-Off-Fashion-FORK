@@ -131,7 +131,9 @@
 
             <div class="mt-4">
                 <button type="submit" class="px-4 py-2 bg-black text-white">Update Product</button>
-                <a href="{{ route('products.index') }}" class="ml-3 text-sm underline">Cancel</a>
+                    <a href="{{ route('products.index') }}" class="ml-3 text-sm underline">
+                        Cancel
+                    </a>
             </div>
         </form>
     </section>

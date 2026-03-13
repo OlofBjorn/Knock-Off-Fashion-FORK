@@ -51,7 +51,7 @@
                     </p>
 
                     <h1 class="text-5xl font-bold leading-tight mb-6">
-                        Manage your cheap knock off fashion catalog with ease
+                        Manage your cheap Knock Off Fashion catalog with ease
                     </h1>
 
                     <a href="{{ route('login') }}"

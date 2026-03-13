@@ -28,7 +28,7 @@
                     id="brand_name"
                     name="brand_name"
                     type="text"
-                    value="{{ old('brand_name', $product->brand_name) }}"
+                    value="{{ old('brand_name') }}"
                     class="mt-1 block w-full border px-2 py-1"
                     aria-invalid="{{ $errors->has('brand_name') ? 'true' : 'false' }}"
                     aria-describedby="{{ $errors->has('brand_name') ? 'brand_name-error' : 'brand_name-help' }}"
