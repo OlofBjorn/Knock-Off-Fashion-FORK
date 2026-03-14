@@ -46,7 +46,6 @@
                     <tr>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Brand</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Product name</th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Description</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Price</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Category</th>
                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Color</th>
@@ -58,8 +57,15 @@
                     @forelse($products as $product)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->brand_name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->product_name }}</td>
-                            <td class="px-6 py-4 text-sm text-gray-700">{{ $product->description }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 max-w-xs relative group">
+                                <span class="truncate block">
+                                    {{ Str::limit($product->product_name, 30) }}
+                                </span>
+
+                                <div class="absolute left-0 top-full mt-1 hidden group-hover:block bg-gray-900 text-white text-sm px-3 py-2 rounded shadow-lg z-50 max-w-xs">
+                                    {{ $product->product_name }}
+                                </div>
+                            </td>
                             <td class="px-6 py-4 text-sm text-gray-900">SEK {{ number_format($product->price, 2) }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $product->category }}</td>
                             <td class="px-6 py-4 text-sm text-gray-700">{{ $product->color }}</td>
@@ -121,7 +127,7 @@
                 </tr>
                     @empty
                         <tr>
-                            <td class="px-6 py-4 text-sm text-gray-700" colspan="8">No products found.</td>
+                            <td class="px-6 py-4 text-sm text-gray-700" colspan="7">No products found.</td>
                         </tr>
                     @endforelse
                 </tbody>

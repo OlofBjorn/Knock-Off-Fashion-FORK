@@ -103,7 +103,7 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'brand_name' => 'required|string|max:50',
-            'description' => 'required|string|max 150',
+            'description' => 'required|string|max:150',
             'price' => 'required|numeric|min:0',
             'category' => 'required|string|max:50',
             'color' => 'required|string|max:50',
