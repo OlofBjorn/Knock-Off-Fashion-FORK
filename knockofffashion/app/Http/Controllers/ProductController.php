@@ -21,6 +21,16 @@ class ProductController extends Controller
                     ["%{$brand}%"]
                 );
             })
+
+            ->when($request->product_name, function ($query, $productName) {
+                $productName = strtolower(str_replace(' ', '', $productName));
+
+                $query->whereRaw(
+                    "REPLACE(LOWER(product_name), ' ', '') LIKE ?",
+                    ["%{$productName}%"]
+                );
+            })
+
             ->when($request->category, function ($query, $category) {
                 $category = strtolower(str_replace(' ', '', $category));
 
@@ -55,12 +65,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'brand_name' => 'required|string|max:255',
-            'description'=> 'required|string',
+            'brand_name' => 'required|string|max:50',
+            'description' => 'required|string|max:150',
             'price' => 'required|numeric|min:0',
-            'category' => 'required|string|max:255',
+            'category' => 'required|string|max:50',
             'color' => 'required|string|max:50',
             'stock' => 'required|integer|min:0',
+            'product_name' => 'required|string|max:50',
         ]);  
         
         Product::create($validated); 
@@ -91,12 +102,13 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'brand_name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'brand_name' => 'required|string|max:50',
+            'description' => 'required|string|max:150',
             'price' => 'required|numeric|min:0',
-            'category' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
+            'category' => 'required|string|max:50',
+            'color' => 'required|string|max:50',
             'stock' => 'required|integer|min:0',
+            'product_name' => 'required|string|max:50',
         ]);
         $product->update($validated);
 

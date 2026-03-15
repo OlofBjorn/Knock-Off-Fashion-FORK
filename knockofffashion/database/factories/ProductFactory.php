@@ -41,8 +41,15 @@ class ProductFactory extends Factory
             'Caps'
         ];
 
+        $productbrand = fake()->randomElement($brands);
+
+        $suffixes = ['Max', 'Elite', 'Ultra', 'Pro', 'Plus'];
+
         return [
-            'brand_name' => fake()->randomElement($brands),
+            'brand_name' => $productbrand,
+            'product_name' => $productbrand . ' Model ' .
+                fake()->numberBetween(100, 999) . ' ' .
+                fake()->optional()->randomElement($suffixes),
             'description' => fake()->sentence(),
             'price' => fake()->randomFloat(2, 199, 999),
             'category' => fake()->randomElement($categories),
