@@ -41,15 +41,15 @@ class ProductFactory extends Factory
             'Caps'
         ];
 
+        //Establishes the brand to ensure consistency in brandname in the product data fields and suffixes to be used in the product names.
+
         $productbrand = fake()->randomElement($brands);
 
         $suffixes = ['Max', 'Elite', 'Ultra', 'Pro', 'Plus'];
 
         return [
             'brand_name' => $productbrand,
-            'product_name' => $productbrand . ' Model ' .
-                fake()->numberBetween(100, 999) . ' ' .
-                fake()->optional()->randomElement($suffixes),
+            'product_name' => sprintf($productbrand, ' Model ', fake()->numberBetween(100, 999), fake()->optional()->randomElement($suffixes)),
             'description' => fake()->sentence(),
             'price' => fake()->randomFloat(2, 199, 999),
             'category' => fake()->randomElement($categories),
